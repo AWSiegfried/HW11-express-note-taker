@@ -21,14 +21,10 @@ app.use(express.static("./Develop/public"));
 //HTML ROUTES 
 //Create a route to serve our html files so when we hit those endpoints, the browser will serve our html to us. 
 //We are defining our home routes, which takes in a callback function with request and response
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "/public/index"))
-})
 
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname + "/Develop/public/notes.html"));
 });
-
 
 //API ROUTES HERE
 //Our end goal is to return the data in db.json in our response 
@@ -42,21 +38,27 @@ app.post("/api/notes", (req, res) => {
     num++;
     const newNote = req.body;
     newNote.id = num;
-    // const newNote = {
-    //     data: req.body,
-    //     id: num
-    // }
     db.push(newNote);
-    res.json(db)
+    fs.writeFile("./Develop/db/db.json", JSON.stringify(db), err => {
+        if (err) throw err
+        res.json(db)
+    })
 })
 
 app.delete("/api/notes/:id", (req, res) => {
     const id = req.params.id;
     const dbIndex = db.findIndex(p => p.id == id);
     db.splice(dbIndex, 1);
-    return res.send();
+    fs.writeFile("./Develop/db/db.json", JSON.stringify(db), err => {
+        if (err) throw err
+        res.json(db)
+    })
 })
 
+// Should user input a url that doens't exist, send them back to homepage
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/Develop/public/index.html"));
+});
 
 //SERVER LISTENER
 app.listen(PORT, () => {
