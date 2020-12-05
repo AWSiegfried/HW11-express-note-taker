@@ -13,7 +13,7 @@
 
 ## **Description**
 
-a
+The purpose of this assignment was to create a note take that allows the user to create, read and delete a note from a webpage. When a note is saved the note should then push to the database, therefor not requiring the server to remain connected to house all the information.  I used Express and MySQL to do this and then pushed it to Heroku to have a live website.  The part I struggled with most was the manipulation of the req.body dataset.  If I had more time I would add a longer, more-randomized ID generator, instead of just incrementing it by one each time.  I would also add in some more stylish CSS.
 
 ## **Installation**
 1. Clone the repo
@@ -26,10 +26,9 @@ https://github.com/AWSiegfried/HW11-express-note-taker.git
 npm install
 ```
 ## **Screenshots**
-![screenshot](./Develop/public/assets/images/notetaker1.png?raw=true)
-
 ![screenshot](./Develop/public/assets/images/notetaker2.png?raw=true)
 
+![screenshot](./Develop/public/assets/images/notetaker1.png?raw=true)
 
 
 ## **Contributing**
